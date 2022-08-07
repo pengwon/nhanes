@@ -29,7 +29,7 @@ def request_file(src_url, dest_fn):
     try:
         r = requests.get(src_url, stream = True)
         with open(dest_fn, 'wb') as f:
-            for ch in r:
+            for ch in r.iter_content(chunk_size=512):
                 f.write(ch)
     except:
         print("  Failed downloading file", src_url, ", canceling!")
